@@ -1,21 +1,22 @@
 package com.jobjet.domain.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
 
-@Entity
+
 
 public class Service {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
   private BigDecimal price;
   private Integer duration;
+
+  public Service(Long id, String name, BigDecimal price, Integer duration) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.duration = duration;
+  }
 
   public Long getId() {
     return id;
@@ -46,13 +47,6 @@ public class Service {
   }
 
   public void setDuration(Integer duration) {
-    this.duration = duration;
-  }
-
-  public Service(Long id, String name, BigDecimal price, Integer duration) {
-    this.id = id;
-    this.name = name;
-    this.price = price;
     this.duration = duration;
   }
 }
