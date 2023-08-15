@@ -10,10 +10,10 @@ public class OfferingMapper {
 
   public static OfferingJpaEntity toEntity(Offering offering) {
     OfferingJpaEntity offeringJpaEntity = new OfferingJpaEntity();
-    offeringJpaEntity.setId(offering.getId());
-    offeringJpaEntity.setName(offering.getName());
-    offeringJpaEntity.setPrice(offering.getPrice());
-    offeringJpaEntity.setDuration(offering.getDuration());
+    offeringJpaEntity.setId(offering.id());
+    offeringJpaEntity.setName(offering.name());
+    offeringJpaEntity.setPrice(offering.price());
+    offeringJpaEntity.setDuration(offering.duration());
     return offeringJpaEntity;
   }
 }

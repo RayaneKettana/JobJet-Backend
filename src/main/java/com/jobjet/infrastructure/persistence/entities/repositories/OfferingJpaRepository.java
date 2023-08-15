@@ -2,6 +2,16 @@ package com.jobjet.infrastructure.persistence.entities.repositories;// com.jobje
 
 import com.jobjet.infrastructure.persistence.entities.OfferingJpaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.Repository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-public interface OfferingJpaRepository extends JpaRepository<OfferingJpaEntity, Long> {
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
+
+@RepositoryRestResource(exported = false)
+public interface OfferingJpaRepository extends CrudRepository<OfferingJpaEntity, Long> {
+    boolean existsOfferingJpaEntitiesByName(String name);
 }

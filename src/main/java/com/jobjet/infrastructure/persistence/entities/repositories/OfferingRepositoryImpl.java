@@ -7,27 +7,33 @@ import com.jobjet.infrastructure.persistence.entities.mapper.OfferingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public class OfferingRepositoryImpl implements IOfferingRepository {
 
-  private final OfferingJpaRepository jpaRepository;
+    private final OfferingJpaRepository jpaRepository;
 
-  @Autowired
-  public OfferingRepositoryImpl(OfferingJpaRepository jpaRepository) {
-    this.jpaRepository = jpaRepository;
-  }
+    @Autowired
+    public OfferingRepositoryImpl(OfferingJpaRepository jpaRepository) {
+        this.jpaRepository = jpaRepository;
+    }
 
-  @Override
-  public Offering save(Offering offering) {
-    OfferingJpaEntity offeringJpaEntity = OfferingMapper.toEntity(offering);
-    OfferingJpaEntity savedEntity = jpaRepository.save(offeringJpaEntity);
-    return OfferingMapper.toDomain(savedEntity);
-  }
+    @Override
+    public Offering save(Offering offering) {
+        OfferingJpaEntity offeringJpaEntity = OfferingMapper.toEntity(offering);
+        OfferingJpaEntity savedEntity = jpaRepository.save(offeringJpaEntity);
+        return OfferingMapper.toDomain(savedEntity);
+    }
 
-  @Override
-  public Offering findById(Long id) {
-    return jpaRepository.findById(id)
-            .map(OfferingMapper::toDomain)
-            .orElse(null);
-  }
+    @Override
+    public Optional<Offering> findById(Long id) {
+        return jpaRepository.findById(id)
+                .map(OfferingMapper::toDomain);
+    }
+
+    @Override
+    public boolean exists(String name) {
+        return jpaRepository.existsOfferingJpaEntitiesByName(name);
+    }
 }
