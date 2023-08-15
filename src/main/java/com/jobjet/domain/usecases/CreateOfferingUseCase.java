@@ -1,35 +1,36 @@
 package com.jobjet.domain.usecases;
 
-import com.jobjet.domain.entities.Service;
-import com.jobjet.domain.repositories.IServiceRepository;
+import com.jobjet.domain.entities.Offering;
+import com.jobjet.domain.repositories.IOfferingRepository;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+@Service
+public class CreateOfferingUseCase {
 
-public class CreateServiceUseCase {
+  private final IOfferingRepository repository;
 
-  private final IServiceRepository repository;
-
-  public CreateServiceUseCase(IServiceRepository repository) {
+  public CreateOfferingUseCase(IOfferingRepository repository) {
     this.repository = repository;
   }
 
-  public Service execute(CreateServiceInput input) {
-    Service newService = new Service(
+  public Offering execute(CreateOfferingInput input) {
+    Offering newOffering = new Offering(
             null,
             input.getName(),
             input.getPrice(),
             input.getDuration()
     );
 
-    return repository.save(newService);
+    return repository.save(newOffering);
   }
 
-  public static class CreateServiceInput {
+  public static class CreateOfferingInput {
     private final String name;
     private final BigDecimal price;
     private final Integer duration;
 
-    public CreateServiceInput(String name, BigDecimal price, Integer duration) {
+    public CreateOfferingInput(String name, BigDecimal price, Integer duration) {
       this.name = name;
       this.price = price;
       this.duration = duration;

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 @Entity
 
-public class ServiceEntity {
+public class OfferingJpaEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

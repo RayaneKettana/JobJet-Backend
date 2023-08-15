@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 
 
 
-public class Service {
+public class Offering {
   private Long id;
   private String name;
   private BigDecimal price;
   private Integer duration;
 
-  public Service(Long id, String name, BigDecimal price, Integer duration) {
+  public Offering(Long id, String name, BigDecimal price, Integer duration) {
     this.id = id;
     this.name = name;
     this.price = price;
