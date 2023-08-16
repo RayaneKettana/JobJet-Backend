@@ -4,11 +4,9 @@ import com.jobjet.domain.entities.Offering;
 import com.jobjet.domain.usecases.CreateOfferingInput;
 import com.jobjet.domain.usecases.CreateOfferingUseCase;
 import com.jobjet.domain.usecases.OfferingAlreadyExist;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/offerings")
@@ -19,16 +17,21 @@ public class OfferingController {
     public OfferingController(CreateOfferingUseCase createOfferingUseCase) {
         this.createOfferingUseCase = createOfferingUseCase;
     }
-
     @PostMapping
-    public ResponseEntity<?> createOffering(@RequestBody CreateOfferingInput input) {
-        try {
-            Offering newOffering = createOfferingUseCase.execute(input);
-            return ResponseEntity.status(201).body(newOffering);
-        } catch (OfferingAlreadyExist e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-//      ResponseEntity.created("offering/newOffering.id).body(newOffering).build();
-//        TODO
+    public ResponseEntity<Offering> createOffering(@RequestBody CreateOfferingInput input) {
+        Offering newOffering = createOfferingUseCase.execute(input);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newOffering);
     }
+    @ExceptionHandler(OfferingAlreadyExist.class)
+    public ResponseEntity<ErrorDetails> handleOfferingAlreadyExistException(OfferingAlreadyExist e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDetails("OFFERING_ALREADY_EXISTS", e.getMessage()));
+    }
+
+    public static class ErrorDetails {
+
+        public ErrorDetails(String errorCode, String errorMessage) {
+        }
+
+    }
+
 }
