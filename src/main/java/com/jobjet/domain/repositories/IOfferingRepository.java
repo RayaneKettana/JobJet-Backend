@@ -8,5 +8,5 @@ public interface IOfferingRepository {
   Offering save(Offering offering);
   Optional<Offering> findById(Long id);
 
-    boolean exists(String name);
+  boolean exists(String name);
 }
