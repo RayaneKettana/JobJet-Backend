@@ -33,7 +33,17 @@ public class OfferingRepositoryImpl implements IOfferingRepository {
     }
 
     @Override
+    public void delete(Long id) {
+        jpaRepository.deleteById(id);
+    }
+
+    @Override
     public boolean exists(String name) {
         return jpaRepository.existsOfferingJpaEntitiesByName(name);
+    }
+
+    @Override
+    public boolean existById(Long id) {
+        return jpaRepository.existsById(id);
     }
 }

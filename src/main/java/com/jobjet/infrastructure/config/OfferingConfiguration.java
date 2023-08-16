@@ -1,6 +1,7 @@
 package com.jobjet.infrastructure.config;
 
 import com.jobjet.domain.usecases.CreateOfferingUseCase;
+import com.jobjet.domain.usecases.DeleteOfferingUseCase;
 import com.jobjet.infrastructure.persistence.entities.repositories.OfferingRepositoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,5 +17,10 @@ public class OfferingConfiguration {
     @Bean
     CreateOfferingUseCase createOfferingUseCase() {
         return new CreateOfferingUseCase(offeringRepository);
+    }
+
+    @Bean
+    DeleteOfferingUseCase deleteOfferingUseCase() {
+        return new DeleteOfferingUseCase(offeringRepository);
     }
 }
