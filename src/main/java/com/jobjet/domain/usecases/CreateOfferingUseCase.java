@@ -2,6 +2,7 @@ package com.jobjet.domain.usecases;
 
 import com.jobjet.domain.entities.Offering;
 import com.jobjet.domain.repositories.IOfferingRepository;
+import com.jobjet.domain.usecases.exceptions.OfferingAlreadyExist;
 import com.jobjet.domain.usecases.inputs.CreateOfferingInput;
 
 public class CreateOfferingUseCase {

@@ -1,4 +1,4 @@
-package com.jobjet.domain.usecases;
+package com.jobjet.domain.usecases.exceptions;
 
 public class OfferingAlreadyExist extends RuntimeException {
 
