@@ -1,7 +1,7 @@
 package com.jobjet.application.controllers;
 
 import com.jobjet.domain.entities.Offering;
-import com.jobjet.domain.usecases.CreateOfferingInput;
+import com.jobjet.domain.usecases.inputs.CreateOfferingInput;
 import com.jobjet.domain.usecases.CreateOfferingUseCase;
 import com.jobjet.domain.usecases.OfferingAlreadyExist;
 import org.springframework.http.HttpStatus;
@@ -27,6 +27,7 @@ public class OfferingController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDetails("OFFERING_ALREADY_EXISTS", e.getMessage()));
     }
 
+    // Refactor this class to reuse it in other controllers
     public static class ErrorDetails {
         private final String errorCode;
         private final String errorMessage;
