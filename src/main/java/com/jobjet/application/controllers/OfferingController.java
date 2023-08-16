@@ -28,10 +28,22 @@ public class OfferingController {
     }
 
     public static class ErrorDetails {
+        private final String errorCode;
+        private final String errorMessage;
 
         public ErrorDetails(String errorCode, String errorMessage) {
+            this.errorCode = errorCode;
+            this.errorMessage = errorMessage;
         }
 
+        public String getErrorCode() {
+            return errorCode;
+        }
+
+        public String getErrorMessage() {
+            return errorMessage;
+        }
     }
+
 
 }
