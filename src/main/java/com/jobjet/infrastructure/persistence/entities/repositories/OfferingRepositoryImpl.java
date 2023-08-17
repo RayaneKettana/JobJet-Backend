@@ -33,6 +33,13 @@ public class OfferingRepositoryImpl implements IOfferingRepository {
     }
 
     @Override
+    public Offering update(Offering offering) {
+        OfferingJpaEntity offeringJpaEntity = OfferingMapper.toEntity(offering);
+        OfferingJpaEntity updatedEntity = jpaRepository.save(offeringJpaEntity);
+        return OfferingMapper.toDomain(updatedEntity);
+    }
+
+    @Override
     public void delete(Long id) {
         jpaRepository.deleteById(id);
     }

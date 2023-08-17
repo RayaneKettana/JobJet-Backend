@@ -2,6 +2,7 @@ package com.jobjet.application.controllers;
 
 import com.jobjet.domain.entities.Offering;
 import com.jobjet.domain.usecases.DeleteOfferingUseCase;
+import com.jobjet.domain.usecases.UpdateOfferingUseCase;
 import com.jobjet.domain.usecases.exceptions.OfferingNotFoundException;
 import com.jobjet.domain.usecases.inputs.CreateOfferingInput;
 import com.jobjet.domain.usecases.CreateOfferingUseCase;
@@ -16,10 +17,12 @@ public class OfferingController {
 
     private final CreateOfferingUseCase createOfferingUseCase;
     private final DeleteOfferingUseCase deleteOfferingUseCase;
+    private final UpdateOfferingUseCase updateOfferingUseCase;
 
-    public OfferingController(CreateOfferingUseCase createOfferingUseCase, DeleteOfferingUseCase deleteOfferingUseCase) {
+    public OfferingController(CreateOfferingUseCase createOfferingUseCase, DeleteOfferingUseCase deleteOfferingUseCase, UpdateOfferingUseCase updateOfferingUseCase) {
         this.createOfferingUseCase = createOfferingUseCase;
         this.deleteOfferingUseCase = deleteOfferingUseCase;
+        this.updateOfferingUseCase = updateOfferingUseCase;
     }
     @PostMapping
     public ResponseEntity<Offering> createOffering(@RequestBody CreateOfferingInput input) {
@@ -30,6 +33,12 @@ public class OfferingController {
     @DeleteMapping("/{offeringId}")
     public ResponseEntity<Void> deleteOffering(@PathVariable Long offeringId) {
         deleteOfferingUseCase.execute(offeringId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+    }
+
+    @PutMapping("/{offeringId}")
+    public ResponseEntity<Void> updateOffering(@PathVariable Long offeringId, @RequestBody Offering offering) {
+        updateOfferingUseCase.execute(offering);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
     @ExceptionHandler(OfferingAlreadyExist.class)
