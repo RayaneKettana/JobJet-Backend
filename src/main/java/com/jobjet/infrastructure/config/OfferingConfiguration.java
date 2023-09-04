@@ -2,6 +2,7 @@ package com.jobjet.infrastructure.config;
 
 import com.jobjet.domain.usecases.CreateOfferingUseCase;
 import com.jobjet.domain.usecases.DeleteOfferingUseCase;
+import com.jobjet.domain.usecases.GetAllOfferingsUseCase;
 import com.jobjet.domain.usecases.UpdateOfferingUseCase;
 import com.jobjet.infrastructure.persistence.entities.repositories.OfferingRepositoryImpl;
 import org.springframework.context.annotation.Bean;
@@ -28,5 +29,10 @@ public class OfferingConfiguration {
     @Bean
     UpdateOfferingUseCase updateOfferingUseCase() {
         return new UpdateOfferingUseCase(offeringRepository);
+    }
+
+    @Bean
+    GetAllOfferingsUseCase getAllOfferingsUseCase() {
+        return new GetAllOfferingsUseCase(offeringRepository);
     }
 }
